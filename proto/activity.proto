@@ -1,0 +1,33 @@
+syntax="proto3";
+
+package activities;
+
+option go_package = "./proto";
+
+service ActivityService{
+    rpc GetActivities(ActivityRequest) returns (stream ActivityResponse) {};
+}
+
+message ActivityRequest{
+    string day = 1; //E.g SUnday, Monday e.t.c
+}
+
+message ActivityResponse{
+    Activity activity = 1;
+}
+
+message Activity{
+    string activityName = 1;
+    string activityTime = 2;
+    ActivitySupervisor activitySupervisor = 3;
+}
+
+message ActivitySupervisor{
+    string supervisorName = 1;
+    int32 supervisorAge = 2;
+    enum Gender{
+        Male = 0;
+        Female = 1;
+    }
+    Gender supervisorGender = 3;
+}
